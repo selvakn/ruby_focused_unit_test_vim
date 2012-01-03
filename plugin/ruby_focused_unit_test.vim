@@ -8,22 +8,36 @@ command RunAllRubyTests :call <SID>RunAllRubyTests()
 command RunLastRubyTest :call <SID>RunLastRubyTest()
 
 function! s:RunRubyFocusedUnitTest()
+  echomsg "Running Focused Specs..."
+  sleep 10m
   ruby RubyFocusedUnitTest.new.run_test
 endfunction
 
 function! s:RunRubyFocusedContext()
+  echomsg "Running Focused Context..."
+  sleep 10m
   ruby RubyFocusedUnitTest.new.run_context
 endfunction
 
 function! s:RunAllRubyTests()
+  echomsg "Running All Specs..."
+  sleep 10m
   ruby RubyFocusedUnitTest.new.run_all
 endfunction
 
 function! s:RunLastRubyTest()
+  echomsg "Running Last Spec..."
+  sleep 10m
   ruby RubyFocusedUnitTest.new.run_last
 endfunction
 
 ruby << EOF
+
+class Object
+  # hack to workaround 1.9.2 issues
+  def flush; end
+end
+
 module VIM
   class Buffer
     class << self
